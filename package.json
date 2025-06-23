@@ -1,0 +1,30 @@
+{
+  "name": "team-lunch-recommender",
+  "version": "1.0.0",
+  "description": "智能团队午餐推荐H5应用 - 解决选择困难症",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8080",
+    "start": "python -m http.server 8080",
+    "build": "echo 'Static site, no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "lunch",
+    "recommendation",
+    "team",
+    "food",
+    "h5",
+    "webapp"
+  ],
+  "author": "AI进化论-花生",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "homepage": ".",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
