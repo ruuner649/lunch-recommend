@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>团队午餐推荐 - 解决选择困难症</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-bg">
+                <div class="container">
+                    <h1 class="app-title">🍽️ 团队午餐推荐</h1>
+                    <p class="app-subtitle">让选择变得简单，让用餐更加美好</p>
+                    <div class="team-info">
+                        <span class="team-count">👥 团队成员: 4人</span>
+                        <span class="location">📍 上海市松江区千帆路288弄</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="main">
+            <div class="container">
+                <!-- 个人设置区域 -->
+                <section class="profile-section" id="profileSection">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>👤 个人口味设置</h2>
+                            <p>设置您的口味偏好，获得更精准的推荐</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- 籍贯选择 -->
+                            <div class="form-group">
+                                <label for="hometown">籍贯</label>
+                                <select id="hometown" class="form-control">
+                                    <option value="">请选择您的籍贯</option>
+                                    <option value="河南">河南</option>
+                                    <option value="湖南">湖南</option>
+                                    <option value="安徽">安徽</option>
+                                    <option value="上海">上海</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+
+                            <!-- 口味偏好 -->
+                            <div class="taste-preferences">
+                                <div class="preference-item">
+                                    <label>辣度偏好</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="spicyLevel" min="1" max="5" value="3" class="slider spicy-slider">
+                                        <div class="slider-labels">
+                                            <span>不辣</span>
+                                            <span id="spicyLevelText" class="level-text">中辣</span>
+                                            <span>超辣</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="preference-item">
+                                    <label>甜度偏好</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="sweetLevel" min="1" max="5" value="3" class="slider sweet-slider">
+                                        <div class="slider-labels">
+                                            <span>不甜</span>
+                                            <span id="sweetLevelText" class="level-text">中甜</span>
+                                            <span>很甜</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="preference-item">
+                                    <label>咸淡偏好</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="saltyLevel" min="1" max="5" value="3" class="slider salty-slider">
+                                        <div class="slider-labels">
+                                            <span>清淡</span>
+                                            <span id="saltyLevelText" class="level-text">适中</span>
+                                            <span>重口</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 菜系偏好 -->
+                            <div class="form-group">
+                                <label>喜欢的菜系 (可多选)</label>
+                                <div class="cuisine-tags" id="cuisineTags">
+                                    <span class="tag" data-cuisine="川菜">川菜</span>
+                                    <span class="tag" data-cuisine="湘菜">湘菜</span>
+                                    <span class="tag" data-cuisine="徽菜">徽菜</span>
+                                    <span class="tag" data-cuisine="本帮菜">本帮菜</span>
+                                    <span class="tag" data-cuisine="粤菜">粤菜</span>
+                                    <span class="tag" data-cuisine="日本料理">日本料理</span>
+                                    <span class="tag" data-cuisine="快餐">快餐</span>
+                                    <span class="tag" data-cuisine="西餐">西餐</span>
+                                </div>
+                            </div>
+
+                            <!-- 预算选择 -->
+                            <div class="form-group">
+                                <label for="budget">预算范围</label>
+                                <select id="budget" class="form-control">
+                                    <option value="20-30">20-30元</option>
+                                    <option value="30-50" selected>30-50元</option>
+                                    <option value="50-80">50-80元</option>
+                                    <option value="80-100">80-100元</option>
+                                    <option value="100+">100元以上</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary btn-large" onclick="generateRecommendations()">
+                                🎯 开始智能推荐
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 推荐结果区域 -->
+                <section class="recommendations-section" id="recommendationsSection" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🍽️ 为您推荐</h2>
+                            <p>基于您的口味偏好，为您精选的餐厅</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="recommendations-list" id="recommendationsList">
+                                <!-- 推荐结果将在这里动态生成 -->
+                            </div>
+                            <button class="btn btn-secondary" onclick="showProfile()">
+                                ← 重新设置偏好
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 团队投票区域 -->
+                <section class="vote-section" id="voteSection" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>🗳️ 团队投票</h2>
+                            <p>让团队成员为推荐的餐厅投票</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="vote-list" id="voteList">
+                                <!-- 投票选项将在这里生成 -->
+                            </div>
+                            <div class="vote-results" id="voteResults" style="display: none;">
+                                <h3>🏆 投票结果</h3>
+                                <div id="winnerResult"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="showProfile()">
+                <i class="fas fa-user"></i>
+                <span>设置</span>
+            </div>
+            <div class="nav-item" onclick="showRecommendations()">
+                <i class="fas fa-utensils"></i>
+                <span>推荐</span>
+            </div>
+            <div class="nav-item" onclick="showVote()">
+                <i class="fas fa-vote-yea"></i>
+                <span>投票</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="restaurantModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- 餐厅详情将在这里显示 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
