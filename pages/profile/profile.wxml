@@ -1,0 +1,218 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-info-section">
+    <view class="user-card card">
+      <view class="card-body">
+        <view class="user-avatar-section">
+          <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+          <view class="user-basic-info">
+            <text class="user-name">{{userInfo.nickName || '未设置'}}</text>
+            <text class="user-location">来自: {{userProfile.hometown || '请选择籍贯'}}</text>
+          </view>
+        </view>
+        
+        <button class="btn btn-outline btn-small" bindtap="getUserInfo" wx:if="{{!userInfo.nickName}}">
+          授权获取头像昵称
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息设置 -->
+  <view class="basic-info-section">
+    <view class="section-title">
+      <text class="title-text">基本信息</text>
+    </view>
+    
+    <view class="form-section card">
+      <view class="card-body">
+        <!-- 籍贯选择 -->
+        <view class="form-item">
+          <text class="form-label">籍贯</text>
+          <picker mode="multiSelector" range="{{hometownRange}}" value="{{hometownIndex}}" bindchange="onHometownChange">
+            <view class="form-value {{userProfile.hometown ? '' : 'placeholder'}}">
+              {{userProfile.hometown || '请选择省份和城市'}}
+            </view>
+          </picker>
+        </view>
+        
+        <!-- 年龄范围 */
+        <view class="form-item">
+          <text class="form-label">年龄范围</text>
+          <picker mode="selector" range="{{ageRange}}" value="{{ageIndex}}" bindchange="onAgeChange">
+            <view class="form-value {{userProfile.ageRange ? '' : 'placeholder'}}">
+              {{userProfile.ageRange || '请选择年龄范围'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 口味偏好设置 -->
+  <view class="taste-preference-section">
+    <view class="section-title">
+      <text class="title-text">口味偏好</text>
+      <text class="title-subtitle">帮助我们更好地为您推荐餐厅</text>
+    </view>
+    
+    <view class="preference-card card">
+      <view class="card-body">
+        <!-- 辣度偏好 -->
+        <view class="preference-item">
+          <view class="preference-header">
+            <text class="preference-label">辣度偏好</text>
+            <text class="preference-level">{{spicyLevels[userProfile.tastePreferences.spicyLevel - 1]}}</text>
+          </view>
+          <slider 
+            class="preference-slider spicy-slider" 
+            min="1" 
+            max="5" 
+            step="1" 
+            value="{{userProfile.tastePreferences.spicyLevel}}"
+            activeColor="#FF6B35"
+            bindchange="onSpicyLevelChange"
+          />
+          <view class="level-indicators">
+            <text class="level-text">不辣</text>
+            <text class="level-text">超辣</text>
+          </view>
+        </view>
+        
+        <!-- 甜度偏好 -->
+        <view class="preference-item">
+          <view class="preference-header">
+            <text class="preference-label">甜度偏好</text>
+            <text class="preference-level">{{sweetLevels[userProfile.tastePreferences.sweetLevel - 1]}}</text>
+          </view>
+          <slider 
+            class="preference-slider sweet-slider" 
+            min="1" 
+            max="5" 
+            step="1" 
+            value="{{userProfile.tastePreferences.sweetLevel}}"
+            activeColor="#FFA500"
+            bindchange="onSweetLevelChange"
+          />
+          <view class="level-indicators">
+            <text class="level-text">不甜</text>
+            <text class="level-text">很甜</text>
+          </view>
+        </view>
+        
+        <!-- 咸淡偏好 -->
+        <view class="preference-item">
+          <view class="preference-header">
+            <text class="preference-label">咸淡偏好</text>
+            <text class="preference-level">{{saltyLevels[userProfile.tastePreferences.saltyLevel - 1]}}</text>
+          </view>
+          <slider 
+            class="preference-slider salty-slider" 
+            min="1" 
+            max="5" 
+            step="1" 
+            value="{{userProfile.tastePreferences.saltyLevel}}"
+            activeColor="#52c41a"
+            bindchange="onSaltyLevelChange"
+          />
+          <view class="level-indicators">
+            <text class="level-text">清淡</text>
+            <text class="level-text">重口</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜系偏好 -->
+  <view class="cuisine-preference-section">
+    <view class="section-title">
+      <text class="title-text">喜欢的菜系</text>
+      <text class="title-subtitle">可多选，最多选择5个</text>
+    </view>
+    
+    <view class="cuisine-card card">
+      <view class="card-body">
+        <view class="cuisine-tags">
+          <text 
+            class="tag {{item.selected ? 'tag-selected' : ''}}" 
+            wx:for="{{cuisineList}}" 
+            wx:key="name"
+            bindtap="toggleCuisine"
+            data-name="{{item.name}}"
+          >
+            {{item.name}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 忌口设置 -->
+  <view class="dietary-restrictions-section">
+    <view class="section-title">
+      <text class="title-text">忌口食材</text>
+    </view>
+    
+    <view class="restrictions-card card">
+      <view class="card-body">
+        <view class="restrictions-tags">
+          <text 
+            class="tag {{item.selected ? 'tag-selected' : ''}}" 
+            wx:for="{{restrictionsList}}" 
+            wx:key="name"
+            bindtap="toggleRestriction"
+            data-name="{{item.name}}"
+          >
+            {{item.name}}
+          </text>
+        </view>
+        
+        <!-- 自定义输入 -->
+        <view class="custom-input-section">
+          <input 
+            class="custom-input" 
+            placeholder="输入其他忌口食材"
+            value="{{customRestriction}}"
+            bindinput="onCustomRestrictionInput"
+            bindconfirm="addCustomRestriction"
+          />
+          <button class="btn btn-outline btn-small" bindtap="addCustomRestriction">添加</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他设置 -->
+  <view class="other-settings-section">
+    <view class="section-title">
+      <text class="title-text">其他设置</text>
+    </view>
+    
+    <view class="settings-card card">
+      <view class="card-body">
+        <view class="setting-item" bindtap="toggleVegetarian">
+          <text class="setting-label">素食主义者</text>
+          <switch checked="{{userProfile.isVegetarian}}" bindchange="onVegetarianChange" />
+        </view>
+        
+        <view class="setting-item">
+          <text class="setting-label">预算范围</text>
+          <picker mode="selector" range="{{budgetRange}}" value="{{budgetIndex}}" bindchange="onBudgetChange">
+            <view class="setting-value {{userProfile.budgetRange ? '' : 'placeholder'}}">
+              {{userProfile.budgetRange || '请选择预算范围'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-section">
+    <button class="btn btn-primary btn-large btn-full" bindtap="saveProfile" loading="{{saving}}">
+      {{saving ? '保存中...' : '保存设置'}}
+    </button>
+  </view>
+</view> 

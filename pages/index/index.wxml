@@ -1,0 +1,119 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 头部欢迎区域 -->
+  <view class="header-section">
+    <view class="welcome-card card">
+      <view class="card-body">
+        <view class="welcome-text">
+          <text class="welcome-title">欢迎使用团队午餐推荐</text>
+          <text class="welcome-subtitle">让选择变得简单，让用餐更加美好</text>
+        </view>
+        <view class="team-info">
+          <text class="team-count">团队成员: {{teamCount}}人</text>
+          <text class="location-info">📍 {{currentLocation}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速操作区域 -->
+  <view class="quick-actions">
+    <view class="action-grid">
+      <view class="action-item" bindtap="goToRecommend">
+        <view class="action-icon recommend-icon">🍽️</view>
+        <text class="action-title">智能推荐</text>
+        <text class="action-desc">基于口味偏好推荐</text>
+      </view>
+      
+      <view class="action-item" bindtap="goToVote">
+        <view class="action-icon vote-icon">🗳️</view>
+        <text class="action-title">发起投票</text>
+        <text class="action-desc">团队共同决策</text>
+      </view>
+      
+      <view class="action-item" bindtap="goToHistory">
+        <view class="action-icon history-icon">📊</view>
+        <text class="action-title">历史记录</text>
+        <text class="action-desc">查看用餐历史</text>
+      </view>
+      
+      <view class="action-item" bindtap="goToProfile">
+        <view class="action-icon profile-icon">👤</view>
+        <text class="action-title">个人设置</text>
+        <text class="action-desc">设置口味偏好</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日推荐区域 -->
+  <view class="today-recommend">
+    <view class="section-title">
+      <text class="title-text">今日推荐</text>
+      <text class="title-subtitle">根据团队偏好精选</text>
+    </view>
+    
+    <view class="recommend-list">
+      <view class="restaurant-card card" wx:for="{{todayRecommends}}" wx:key="id">
+        <view class="card-body">
+          <view class="restaurant-info">
+            <view class="restaurant-header">
+              <text class="restaurant-name">{{item.name}}</text>
+              <view class="restaurant-rating">
+                <text class="rating-score">{{item.rating}}</text>
+                <text class="rating-star">⭐</text>
+              </view>
+            </view>
+            
+            <view class="restaurant-details">
+              <text class="restaurant-cuisine">{{item.cuisine}}</text>
+              <text class="restaurant-distance">{{item.distance}}m</text>
+              <text class="restaurant-price">人均¥{{item.avgPrice}}</text>
+            </view>
+            
+            <view class="restaurant-tags">
+              <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+            </view>
+            
+            <view class="match-score">
+              <text class="match-text">团队匹配度: </text>
+              <text class="match-percentage">{{item.matchScore}}%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 团队状态区域 -->
+  <view class="team-status">
+    <view class="section-title">
+      <text class="title-text">团队状态</text>
+    </view>
+    
+    <view class="status-card card">
+      <view class="card-body">
+        <view class="status-item">
+          <text class="status-label">今日投票:</text>
+          <text class="status-value">{{todayVoteCount}}次</text>
+        </view>
+        
+        <view class="status-item">
+          <text class="status-label">本周用餐:</text>
+          <text class="status-value">{{weeklyMealCount}}次</text>
+        </view>
+        
+        <view class="status-item">
+          <text class="status-label">偏好菜系:</text>
+          <text class="status-value">{{favoriteGenre}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="bottom-actions">
+    <button class="btn btn-primary btn-large btn-full" bindtap="startRecommend">
+      开始今日推荐
+    </button>
+  </view>
+</view> 

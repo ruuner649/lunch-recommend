@@ -1,0 +1,323 @@
+/**app.wxss**/
+/* 全局样式 */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+/* 主色调 */
+.primary-color {
+  color: #FF6B35;
+}
+
+.primary-bg {
+  background-color: #FF6B35;
+}
+
+/* 辅助色 */
+.secondary-color {
+  color: #FFA500;
+}
+
+.secondary-bg {
+  background-color: #FFA500;
+}
+
+/* 文本色 */
+.text-primary {
+  color: #333333;
+}
+
+.text-secondary {
+  color: #666666;
+}
+
+.text-light {
+  color: #999999;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+/* 背景色 */
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-light {
+  background-color: #f8f8f8;
+}
+
+.bg-gray {
+  background-color: #eeeeee;
+}
+
+/* 按钮样式 */
+.btn {
+  display: inline-block;
+  padding: 24rpx 48rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #FF6B35;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #e55a2b;
+}
+
+.btn-secondary {
+  background-color: #FFA500;
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #FF6B35;
+  border: 2rpx solid #FF6B35;
+}
+
+.btn-outline:hover {
+  background-color: #FF6B35;
+  color: #ffffff;
+}
+
+.btn-small {
+  padding: 16rpx 32rpx;
+  font-size: 24rpx;
+}
+
+.btn-large {
+  padding: 32rpx 64rpx;
+  font-size: 32rpx;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 32rpx;
+}
+
+.card-header {
+  padding: 32rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.card-body {
+  padding: 32rpx;
+}
+
+.card-footer {
+  padding: 24rpx 32rpx;
+  border-top: 2rpx solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+/* 列表样式 */
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+  background-color: #ffffff;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item-content {
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.list-item-title {
+  font-size: 32rpx;
+  color: #333333;
+  margin-bottom: 8rpx;
+}
+
+.list-item-desc {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.list-item-right {
+  color: #999999;
+  font-size: 24rpx;
+}
+
+/* 徽章样式 */
+.badge {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #ffffff;
+  background-color: #FF6B35;
+  margin-left: 8rpx;
+}
+
+.badge-success {
+  background-color: #52c41a;
+}
+
+.badge-warning {
+  background-color: #faad14;
+}
+
+.badge-error {
+  background-color: #f5222d;
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  border-radius: 4rpx;
+  font-size: 22rpx;
+  color: #FF6B35;
+  background-color: #fff2e8;
+  border: 2rpx solid #ffb366;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.tag-selected {
+  color: #ffffff;
+  background-color: #FF6B35;
+}
+
+/* 评分样式 */
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating-star {
+  font-size: 32rpx;
+  color: #ffd700;
+  margin-right: 4rpx;
+}
+
+.rating-star.empty {
+  color: #e0e0e0;
+}
+
+.rating-text {
+  margin-left: 8rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+/* 工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.margin-top {
+  margin-top: 32rpx;
+}
+
+.margin-bottom {
+  margin-bottom: 32rpx;
+}
+
+.margin-left {
+  margin-left: 32rpx;
+}
+
+.margin-right {
+  margin-right: 32rpx;
+}
+
+.padding {
+  padding: 32rpx;
+}
+
+.padding-top {
+  padding-top: 32rpx;
+}
+
+.padding-bottom {
+  padding-bottom: 32rpx;
+}
+
+.padding-left {
+  padding-left: 32rpx;
+}
+
+.padding-right {
+  padding-right: 32rpx;
+}
+
+/* 响应式 */
+@media screen and (max-width: 750rpx) {
+  .container {
+    padding: 100rpx 32rpx;
+  }
+  
+  .card {
+    margin: 0 32rpx 32rpx;
+  }
+} 
